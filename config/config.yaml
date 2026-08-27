@@ -1,0 +1,57 @@
+# ==========================================================
+# NetEvolve — main configuration
+# Nothing in src/ should hardcode values that appear here.
+# ==========================================================
+
+project:
+  name: "NetEvolve"
+  version: "0.1.0"
+  random_seed: 42
+
+paths:
+  raw_data: "data/raw"
+  interim_data: "data/interim"
+  processed_data: "data/processed"
+  models: "models"
+  results: "results"
+
+data:
+  training_file: "UNSW_NB15_training-set.csv"
+  testing_file: "UNSW_NB15_testing-set.csv"
+  target_column: "attack_cat"        # multi-class target (used for this phase)
+  binary_label_column: "label"       # NOT used as the main target in this phase
+  id_column: "id"                    # candidate identifier column; validated before dropping
+
+preprocessing:
+  categorical_columns:               # inspected against the real dataset before finalizing
+    - proto
+    - service
+    - state
+  numerical_columns: []              # auto-populated at runtime as "everything else minus
+                                      # target/id/categorical columns" — see feature_processor.py
+  missing_value_strategy: "median"   # numerical: median impute | categorical: most_frequent
+  scaler: "standard"                 # StandardScaler
+
+baseline_model:
+  name: "random_forest"
+  hyperparameters:
+    n_estimators: 300
+    max_depth: null                  # null = unlimited depth
+    class_weight: "balanced"
+    n_jobs: -1
+
+neural_model:
+  hidden_dimensions: [256, 128]
+  embedding_dimension: 64
+  dropout: 0.3
+
+training:
+  batch_size: 256
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  validation_split: 0.2              # applied to the original training CSV (stratified)
+  early_stopping_patience: 7
+
+device:
+  use_cuda_if_available: true

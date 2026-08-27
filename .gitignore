@@ -1,0 +1,21 @@
+# Environments
+.venv/
+__pycache__/
+*.pyc
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Secrets / local env
+.env
+
+# Data (never commit raw or derived data)
+data/raw/
+data/interim/
+data/processed/
+
+# Trained models / artifacts
+models/
+
+# Logs (generated at runtime)
+results/logs/

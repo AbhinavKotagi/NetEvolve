@@ -1,0 +1,19 @@
+{
+  "target_column": "attack_cat",
+  "known_classes": [
+    "Normal",
+    "DoS",
+    "Exploits",
+    "Fuzzers",
+    "Generic"
+  ],
+  "future_unknown_classes": [
+    "Analysis",
+    "Backdoors",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "known_count": 159841,
+  "unknown_count": 15500
+}

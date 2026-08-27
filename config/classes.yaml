@@ -1,0 +1,25 @@
+# ==========================================================
+# NetEvolve — class configuration
+# This is the SINGLE SOURCE OF TRUTH for known vs. unknown
+# attack categories. src/preprocessing/label_processor.py
+# reads this file — do not hardcode class lists elsewhere.
+#
+# NOTE: exact spelling must be validated against the real
+# UNSW-NB15 `attack_cat` values before Phase 3 (label_processor.py
+# will print any configured class name that has zero matching
+# rows, so typos surface immediately).
+# ==========================================================
+
+known_classes:
+  - Normal
+  - DoS
+  - Exploits
+  - Fuzzers
+  - Generic
+
+future_unknown_classes:
+  - Analysis
+  - Backdoors
+  - Reconnaissance
+  - Shellcode
+  - Worms
