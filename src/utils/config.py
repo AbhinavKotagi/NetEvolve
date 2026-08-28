@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 import yaml
 
-from src.utils.paths import get_project_root
+from utils.paths import get_project_root
 
 
 def load_yaml(path: Path) -> Dict[str, Any]:

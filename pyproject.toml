@@ -15,7 +15,7 @@ exclude = [".venv", "__pycache__", "notebooks", ".ipynb_checkpoints"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["."]
+pythonpath = ["src"]
 
 [build-system]
 requires = ["setuptools>=68.0"]

@@ -13,12 +13,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-# pyrefly: ignore [missing-import]
-from src.preprocessing.preprocessing_pipeline import run_preprocessing_pipeline
-# pyrefly: ignore [missing-import]
-from src.utils.seed import set_seed
-# pyrefly: ignore [missing-import]
-from src.utils.config import load_config
+
+from preprocessing.preprocessing_pipeline import run_preprocessing_pipeline
+
+from utils.seed import set_seed
+
+from utils.config import load_config
 
 
 def main() -> None:

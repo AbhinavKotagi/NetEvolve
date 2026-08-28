@@ -25,11 +25,14 @@ def resolve_feature_columns(train_df: pd.DataFrame, config: dict):
     # Exclude target and id columns from numeric detection
     target_col = config.get('data', {}).get('target_column')
     id_col = config.get('data', {}).get('id_column')
+    binary_col = config.get('data', {}).get('binary_label_column')
     exclude = set(cat_cols)
     if target_col:
         exclude.add(target_col)
     if id_col:
         exclude.add(id_col)
+    if binary_col:
+        exclude.add(binary_col)
     num_cols = [c for c in train_df.select_dtypes(include=['number']).columns if c not in exclude]
     return cat_cols, num_cols
 

@@ -6,7 +6,7 @@ Tests for src/data/loader.py: missing-file handling and successful loading.
 import pandas as pd
 import pytest
 
-from src.data.loader import load_dataset
+from data.loader import load_dataset
 
 
 def test_load_dataset_missing_file_raises(tmp_path):

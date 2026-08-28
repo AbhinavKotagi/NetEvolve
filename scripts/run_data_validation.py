@@ -13,10 +13,10 @@ from pathlib import Path
 # Allow running as `python scripts/run_data_validation.py` from the project root
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.data.loader import load_training_data, load_testing_data
-from src.data.validation import validate_dataset, save_report
-from src.utils.config import load_config, load_classes
-from src.utils.logger import get_logger
+from data.loader import load_training_data, load_testing_data
+from data.validation import validate_dataset, save_report
+from utils.config import load_config, load_classes
+from utils.logger import get_logger
 
 logger = get_logger(__name__)
 

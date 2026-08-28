@@ -177,8 +177,7 @@ To change which categories are treated as "known" for a given experiment, edit
 
 ## Running the Pipeline
 
-> These scripts are scaffolded now and will be implemented phase by phase. Once
-> implemented, the intended usage is:
+The following pipeline stages are fully implemented and can be run sequentially:
 
 ```powershell
 python scripts/run_data_validation.py
@@ -217,17 +216,21 @@ evaluation reports:
 
 ## Results
 
-*(Populated after Phase 5–7. No performance numbers are included here yet — none have
-been produced.)*
+Baseline and neural network performance metrics are generated at runtime and saved to `results/metrics/` and `results/figures/`.
+*(Full cross-validation and hyperparameter tuning results will be documented here once finalizing the closed-set benchmarks).*
 
 ---
 
 ## Current Scope
 
-Implemented in this repository right now: project scaffolding, configuration files,
-and folder structure only (Phase 1). Data loading, validation, preprocessing, baseline
-training, neural network training, and evaluation are scaffolded as placeholder files
-and will be filled in phase by phase.
+**Completed up to Phase 5 (Closed-Set Foundation)**: 
+- Project structure, configuration, and comprehensive unit tests.
+- Leak-free data validation and preprocessing pipeline (StandardScaler + OneHotEncoder).
+- Random Forest Baseline and PyTorch Neural Network (with embedding extraction).
+- Complete training, early stopping, and evaluation loops.
+- Core pipeline scripts fully integrated and executable.
+
+The repository is now ready to begin work on Phase 6 & 7 (Open-Set Recognition, Novel Class Discovery, and Incremental Learning).
 
 ---
 

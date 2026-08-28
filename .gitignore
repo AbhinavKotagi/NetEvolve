@@ -1,21 +1,59 @@
 # Environments
 .venv/
+env/
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
 # Notebooks
 .ipynb_checkpoints/
 
 # Secrets / local env
 .env
+.env.*
 
-# Data (never commit raw or derived data)
-data/raw/
-data/interim/
-data/processed/
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.tox/
+
+# Data (Ignore datasets but keep READMEs)
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.tar.gz
+data/interim/*.csv
+data/interim/*.npy
+data/processed/*.npy
+data/processed/*.json
+data/processed/*.joblib
 
 # Trained models / artifacts
-models/
+models/**/*.joblib
+models/**/*.pt
+models/**/*.pth
+models/**/*.h5
 
-# Logs (generated at runtime)
-results/logs/
+# Results & Logs (generated at runtime)
+results/logs/*.log
+results/metrics/*.json
+results/metrics/*.csv
+results/figures/*.png
+results/figures/*.jpg
+results/figures/*.pdf
+results/reports/*.txt
+results/reports/*.json
+
+# Build
+build/
+dist/
+*.egg-info/
