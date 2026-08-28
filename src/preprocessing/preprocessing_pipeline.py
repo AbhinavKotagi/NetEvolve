@@ -97,18 +97,26 @@ def run_preprocessing_pipeline(config: dict = None, classes: dict = None) -> dic
     preprocessor = build_preprocessor(categorical_cols, numerical_cols)
     fit_preprocessor(preprocessor, train_df[feature_cols])
 
-    X_train = preprocessor.transform(train_df[feature_cols])
-    X_val = preprocessor.transform(val_df[feature_cols])
-    X_test = preprocessor.transform(known_test[feature_cols])
+    import scipy.sparse as sp
+
+    def _to_dense(X):
+        """Convert sparse matrix to dense float32 ndarray if necessary."""
+        if sp.issparse(X):
+            return X.toarray().astype(np.float32)
+        return np.array(X, dtype=np.float32)
+
+    X_train = _to_dense(preprocessor.transform(train_df[feature_cols]))
+    X_val   = _to_dense(preprocessor.transform(val_df[feature_cols]))
+    X_test  = _to_dense(preprocessor.transform(known_test[feature_cols]))
 
     save_preprocessor(preprocessor, models_dir)
 
     # --- Label encoding (fit on configured known classes, not on any split) ---
     logger.info("=== Label encoding ===")
     encoder = fit_label_encoder(classes["known_classes"])
-    y_train = encode_labels(train_df, target_col, encoder)
-    y_val = encode_labels(val_df, target_col, encoder)
-    y_test = encode_labels(known_test, target_col, encoder)
+    y_train = encode_labels(train_df, target_col, encoder).astype(np.int32)
+    y_val   = encode_labels(val_df, target_col, encoder).astype(np.int32)
+    y_test  = encode_labels(known_test, target_col, encoder).astype(np.int32)
     class_mapping = save_label_encoder(encoder, models_dir)
 
     # --- Save processed arrays ---
