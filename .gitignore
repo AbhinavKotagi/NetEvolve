@@ -1,59 +1,24 @@
 # Environments
 .venv/
-env/
-venv/
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-
-# IDE / OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Notebooks
-.ipynb_checkpoints/
-
-# Secrets / local env
+*.pyc
 .env
-.env.*
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.mypy_cache/
-.tox/
 
-# Data (Ignore datasets but keep READMEs)
-data/raw/*.csv
-data/raw/*.zip
-data/raw/*.tar.gz
-data/interim/*.csv
-data/interim/*.npy
-data/processed/*.npy
-data/processed/*.json
-data/processed/*.joblib
+
+# Data (never commit raw or derived data)
+data/raw/
+data/interim/
+data/processed/
 
 # Trained models / artifacts
-models/**/*.joblib
-models/**/*.pt
-models/**/*.pth
-models/**/*.h5
+models/
 
-# Results & Logs (generated at runtime)
-results/logs/*.log
-results/metrics/*.json
-results/metrics/*.csv
-results/figures/*.png
-results/figures/*.jpg
-results/figures/*.pdf
-results/reports/*.txt
-results/reports/*.json
+# Logs (generated at runtime)
+results/logs/
 
-# Build
-build/
-dist/
-*.egg-info/
+# Trained models / artifacts (root-level output dir only — NOT src/models/,
+# which is source code and must be tracked)
+/models/
+/netevolve.egg-info/
+RoNeTC_Implementation_Plan.md

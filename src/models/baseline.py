@@ -9,14 +9,13 @@ from pathlib import Path
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 
-# pyrefly: ignore [missing-import]
-from src.evaluation.metrics import compute_metrics
-# pyrefly: ignore [missing-import]
-from src.evaluation.visualization import plot_confusion_matrix
-# pyrefly: ignore [missing-import]
-from src.models.model_factory import build_baseline_model
-# pyrefly: ignore [missing-import]
-from src.utils.logger import get_logger
+from evaluation.metrics import compute_metrics
+
+from evaluation.visualization import plot_confusion_matrix
+
+from models.model_factory import build_baseline_model
+
+from utils.logger import get_logger
 
 logger = get_logger(__name__)
 

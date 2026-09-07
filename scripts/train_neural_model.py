@@ -17,15 +17,15 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.data.dataset import build_dataloaders
-from src.models.model_factory import build_neural_model
-from src.models.trainer import train_neural_model, save_training_history, get_device
-from src.evaluation.metrics import compute_metrics
-from src.evaluation.visualization import plot_confusion_matrix, plot_training_history
-from src.utils.config import load_config
-from src.utils.paths import get_processed_data_dir, get_models_dir, get_results_dir
-from src.utils.seed import set_seed
-from src.utils.logger import get_logger
+from data.dataset import build_dataloaders
+from models.model_factory import build_neural_model
+from models.trainer import train_neural_model, save_training_history, get_device
+from evaluation.metrics import compute_metrics
+from evaluation.visualization import plot_confusion_matrix, plot_training_history
+from utils.config import load_config
+from utils.paths import get_processed_data_dir, get_models_dir, get_results_dir
+from utils.seed import set_seed
+from utils.logger import get_logger
 
 import torch
 

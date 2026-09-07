@@ -1,5 +1,5 @@
 # ==========================================================
-# NetEvolve — Phase 1 dependencies
+# NetEvolve — dependencies
 # Pin with >= and < to allow patch updates but avoid breaking
 # API changes. Tested against Python 3.10 / 3.11 on Windows (CPU).
 # ==========================================================
@@ -13,6 +13,9 @@ scikit-learn>=1.4,<1.6
 
 # --- Deep learning ---
 torch>=2.2,<2.5
+
+# --- PCAP Parsing (Phase 1 — RoNeTC pipeline) ---
+scapy>=2.5,<2.7
 
 # --- Visualization ---
 matplotlib>=3.8,<3.10

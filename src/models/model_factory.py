@@ -6,7 +6,8 @@ construct sklearn/PyTorch models directly with hardcoded settings.
 """
 from sklearn.ensemble import RandomForestClassifier
 
-from src.models.neural_network import NeuralClassifier
+
+from models.neural_network import NeuralClassifier
 
 
 def build_baseline_model(config: dict) -> RandomForestClassifier:
@@ -28,4 +29,31 @@ def build_neural_model(config: dict, input_dim: int, num_classes: int) -> Neural
         embedding_dimension=nm["embedding_dimension"],
         num_classes=num_classes,
         dropout=nm["dropout"],
+    )
+
+
+# ---------------------------------------------------------------------------
+# RoNeTC — Phase 2: MultiViewFeatureExtractor factory
+# ---------------------------------------------------------------------------
+
+def build_multiview_extractor(config: dict, ip_shape, transport_shape, payload_shape):
+    """Build a MultiViewFeatureExtractor from config + per-view shapes.
+
+    Parameters
+    ----------
+    config : dict
+        Full project config.
+    ip_shape, transport_shape, payload_shape : (H_p, W_p)
+        Per-packet 2D tensor shapes.  Get from ViewEncoder(max_bytes).shape.
+
+    Returns
+    -------
+    MultiViewFeatureExtractor
+    """
+    from models.global_local_extractor import MultiViewFeatureExtractor
+    return MultiViewFeatureExtractor.from_config(
+        config,
+        ip_shape=ip_shape,
+        transport_shape=transport_shape,
+        payload_shape=payload_shape,
     )

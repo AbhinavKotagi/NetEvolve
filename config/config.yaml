@@ -55,3 +55,109 @@ training:
 
 device:
   use_cuda_if_available: true
+
+# ==========================================================
+# RoNeTC Foundation — open-set pipeline configuration
+# All knobs for Phases 1-5. Nothing in src/models/ronetc_*
+# or src/data/multiview_* should hardcode values from here.
+# ==========================================================
+
+ronetc:
+  # -------------------------------------------------------
+  # Phase 1: Flow & View Preprocessing
+  # -------------------------------------------------------
+  flow:
+    packets_per_flow: 12           # l — first l packets captured per bidirectional flow
+    flow_timeout_seconds: 120      # gap > this → new flow
+    bidirectional: true            # sort 5-tuple so A→B and B→A share a flow
+    min_packets_per_flow: 3        # flows with fewer packets are discarded
+
+  views:
+    ip_header:
+      max_bytes: 128               # b — bytes kept from IP header per packet
+    transport_header:
+      max_bytes: 128               # b — bytes kept from transport header per packet
+    payload:
+      max_bytes: 128               # b — bytes kept from payload per packet
+
+  # UNSW-NB15 adapter — column→view mapping (used when no raw PCAP is available)
+  dataset_adapter:
+    replicate_as_packets: true     # replicate each row's features l times as "packets"
+    ip_columns:
+      - dur
+      - sbytes
+      - dbytes
+      - sttl
+      - dttl
+      - sloss
+      - dloss
+      - sload
+      - dload
+    transport_columns:
+      - sport
+      - dsport
+      - proto
+      - service
+      - state
+      - ct_srv_src
+      - ct_srv_dst
+    payload_columns:
+      - spkts
+      - dpkts
+      - smean
+      - dmean
+      - ct_state_ttl
+      - ct_flw_http_mthd
+
+  # -------------------------------------------------------
+  # Phase 2: Global-Local Feature Extractor
+  # -------------------------------------------------------
+  global_local_extractor:
+    enabled: true
+    packets_per_channel: 4        # r — packets per spatial channel group
+    patch_size: 2                 # p — spatial patch size for unfold/fold
+    local_conv_channels: 64       # D — pointwise conv output channels
+    transformer:
+      num_layers: 2
+      num_heads: 4
+      ff_dim: 128
+      dropout: 0.1
+    pooling: "avg"                # "avg" | "max" — global spatial pooling
+    feature_dim: 128              # final per-view feature vector dimension
+
+  # -------------------------------------------------------
+  # Phase 3: Single-View Opinion Generator
+  # -------------------------------------------------------
+  opinion_generator:
+    num_classes: 5                # K — number of known classes
+
+  # -------------------------------------------------------
+  # Phase 4: Multi-View Fusion + Training
+  # -------------------------------------------------------
+  fusion:
+    combination_order:            # DS combination order (sequential pairwise)
+      - ip
+      - transport
+      - payload
+    conflict_clamp_min: 1.0e-7   # clamp denominator (1-C) to avoid division by zero
+
+  training:
+    batch_size: 128
+    epochs: 50
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    early_stopping_patience: 7
+    annealing_epochs: 10          # epochs to linearly ramp λ_t from 0 → annealing_ceiling
+    annealing_ceiling: 1.0        # max value of the KL balance factor λ_t
+
+  # -------------------------------------------------------
+  # Phase 5: Open-Set Classification
+  # -------------------------------------------------------
+  open_set:
+    threshold_search_resolution: 1000   # candidate thresholds for Youden's index search
+    evaluation_metrics:
+      - accuracy
+      - auroc
+      - aupr
+      - macro_f1
+      - fpr_at_95tpr

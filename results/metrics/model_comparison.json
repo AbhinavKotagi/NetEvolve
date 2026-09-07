@@ -1,0 +1,12 @@
+{
+  "Random Forest Baseline": {
+    "accuracy": 0.7913134769422194,
+    "macro_f1": 0.6952463267528864,
+    "weighted_f1": 0.8139825841315262
+  },
+  "Neural Network": {
+    "accuracy": 0.7525079710708453,
+    "macro_f1": 0.6648450005326554,
+    "weighted_f1": 0.7820129646953852
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-09-07T16:33:14",
+  "batch_size": 8,
+  "packets_per_flow": 12,
+  "view_shapes": {
+    "ip": [
+      11,
+      11
+    ],
+    "transport": [
+      11,
+      11
+    ],
+    "payload": [
+      11,
+      11
+    ]
+  },
+  "extractor_config": {
+    "packets_per_channel": 4,
+    "patch_size": 2,
+    "local_conv_channels": 64,
+    "transformer_layers": 2,
+    "transformer_heads": 4,
+    "feature_dim": 128,
+    "pooling": "avg"
+  },
+  "model_parameters": {
+    "total": 204687,
+    "trainable": 204687
+  },
+  "output_shapes": {
+    "ip_features": [
+      8,
+      128
+    ],
+    "transport_features": [
+      8,
+      128
+    ],
+    "payload_features": [
+      8,
+      128
+    ]
+  },
+  "forward_pass_ms_avg": 125.98,
+  "status": "PASS"
+}

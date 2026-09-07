@@ -1,0 +1,146 @@
+{
+  "source": "unsw_nb15_adapter",
+  "timestamp": "2026-09-07T20:25:57",
+  "n_train": 127872,
+  "n_val": 31969,
+  "n_test_known": 77154,
+  "n_test_unknown": 5178,
+  "known_classes": [
+    "Normal",
+    "DoS",
+    "Exploits",
+    "Fuzzers",
+    "Generic"
+  ],
+  "future_unknown_classes": [
+    "Analysis",
+    "Backdoors",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "packets_per_flow": 12,
+  "ip_columns": [
+    "dur",
+    "sbytes",
+    "dbytes",
+    "sttl",
+    "dttl",
+    "sloss",
+    "dloss",
+    "sload",
+    "dload"
+  ],
+  "transport_columns": [
+    "sport",
+    "dsport",
+    "proto",
+    "service",
+    "state",
+    "ct_srv_src",
+    "ct_srv_dst"
+  ],
+  "payload_columns": [
+    "spkts",
+    "dpkts",
+    "smean",
+    "dmean",
+    "ct_state_ttl",
+    "ct_flw_http_mthd"
+  ],
+  "output_shapes": {
+    "train": {
+      "ip": [
+        127872,
+        12,
+        11,
+        11
+      ],
+      "transport": [
+        127872,
+        12,
+        11,
+        11
+      ],
+      "payload": [
+        127872,
+        12,
+        11,
+        11
+      ],
+      "labels": [
+        127872
+      ]
+    },
+    "val": {
+      "ip": [
+        31969,
+        12,
+        11,
+        11
+      ],
+      "transport": [
+        31969,
+        12,
+        11,
+        11
+      ],
+      "payload": [
+        31969,
+        12,
+        11,
+        11
+      ],
+      "labels": [
+        31969
+      ]
+    },
+    "test_known": {
+      "ip": [
+        77154,
+        12,
+        11,
+        11
+      ],
+      "transport": [
+        77154,
+        12,
+        11,
+        11
+      ],
+      "payload": [
+        77154,
+        12,
+        11,
+        11
+      ],
+      "labels": [
+        77154
+      ]
+    },
+    "test_unknown": {
+      "ip": [
+        5178,
+        12,
+        11,
+        11
+      ],
+      "transport": [
+        5178,
+        12,
+        11,
+        11
+      ],
+      "payload": [
+        5178,
+        12,
+        11,
+        11
+      ],
+      "labels": [
+        5178
+      ]
+    }
+  },
+  "divergence_note": "UNSW-NB15 provides engineered flow features, not raw packets. Each flow row is replicated l times as identical synthetic packets. Results are not directly comparable to the original RoNeTC paper."
+}
